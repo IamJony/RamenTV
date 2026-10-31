@@ -45,7 +45,7 @@ fi
 # Wrapper CLI 
 cat > "$STAGE/usr/local/bin/RamenTV-cli-launcher" <<'WRAPPER'
 #!/bin/sh
-export RAMENTV_HOME=/usr/local/share/RamenTV
+export RAMENTV_HOME=/usr/local/bin/RamenTV-cli
 cd /usr/local/bin/RamenTV-cli/ && exec bash ./A-CLI.sh "$@"
 WRAPPER
 chmod 755 "$STAGE/usr/local/bin/RamenTV-cli-launcher"

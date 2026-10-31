@@ -7,6 +7,7 @@ APP=RamenTV
 VER=1.0.0
 OUT="$D/tcz"
 STAGE="$D/tcz-stage"
+HOME_DIR="/usr/local/share/RamenTV"
 
 # Verificar binario y scripts
 [ -x "$D/RamenTV" ] || { echo "ERROR: compila primero (make)"; exit 1; }
@@ -19,47 +20,49 @@ if ! command -v mksquashfs >/dev/null 2>&1; then
 fi
 command -v mksquashfs >/dev/null 2>&1 || { echo "ERROR: falta mksquashfs"; exit 1; }
 
-# Preparar stage (raíz falsa)
+# Preparar stage (raíz falsa) — preservando la jerarquía del proyecto
 rm -rf "$STAGE"
-mkdir -p "$STAGE/usr/local/bin/RamenTV-cli"
-mkdir -p "$STAGE/usr/local/share/RamenTV/asset"
+mkdir -p "$STAGE/usr/local/bin"
+mkdir -p "$STAGE$HOME_DIR/A-CLI/modules"
+mkdir -p "$STAGE$HOME_DIR/asset"
 mkdir -p "$STAGE/usr/local/share/pixmaps"
 mkdir -p "$STAGE/usr/local/share/applications"
 
-# Binario GUI (renombrado a RamenTV-fltk dentro del paquete)
+# Binario GUI
 install -m 755 "$D/RamenTV" "$STAGE/usr/local/bin/RamenTV-fltk"
 
-# Scripts CLI en /usr/local/bin/RamenTV-cli/
-install -m 755 "$D/A-CLI/A-CLI.sh" "$STAGE/usr/local/bin/RamenTV-cli/A-CLI.sh"
+# CLI principal
+install -m 755 "$D/A-CLI/A-CLI.sh" "$STAGE$HOME_DIR/A-CLI/A-CLI.sh"
+
+# Módulos CLI (preservando subcarpeta modules/)
 if [ -d "$D/A-CLI/modules" ]; then
     for f in "$D/A-CLI/modules/"*.sh; do
         [ -f "$f" ] || continue
-        install -m 755 "$f" "$STAGE/usr/local/bin/RamenTV-cli/"
+        install -m 755 "$f" "$STAGE$HOME_DIR/A-CLI/modules/"
     done
 fi
 
 # Asset (imagen de fondo que busca la GUI)
 [ -f "$D/asset/home.jpeg" ] && \
-    install -m 644 "$D/asset/home.jpeg" "$STAGE/usr/local/share/RamenTV/asset/home.jpeg"
+    install -m 644 "$D/asset/home.jpeg" "$STAGE$HOME_DIR/asset/home.jpeg"
 
-# Wrapper CLI 
+# Wrapper CLI: fija CWD en A-CLI/ y exporta RAMENTV_HOME
 cat > "$STAGE/usr/local/bin/RamenTV-cli-launcher" <<'WRAPPER'
 #!/bin/sh
-export RAMENTV_HOME=/usr/local/bin/RamenTV-cli
-cd /usr/local/bin/RamenTV-cli/ && exec bash ./A-CLI.sh "$@"
+export RAMENTV_HOME=/usr/local/share/RamenTV
+cd "$RAMENTV_HOME/A-CLI" || exit 1
+exec bash ./A-CLI.sh "$@"
 WRAPPER
 chmod 755 "$STAGE/usr/local/bin/RamenTV-cli-launcher"
 
-# Wrapper GUI
+# Wrapper GUI: fija CWD en RAMENTV_HOME para que el binario encuentre asset/ y A-CLI/
 cat > "$STAGE/usr/local/bin/RamenTV-launcher" <<'WRAPPER'
 #!/bin/sh
-export RAMENTV_HOME=/usr/local/bin/RamenTV-cli
-cd "$RAMENTV_HOME" && exec /usr/local/bin/RamenTV-fltk "$@"
+export RAMENTV_HOME=/usr/local/share/RamenTV
+cd "$RAMENTV_HOME" || exit 1
+exec /usr/local/bin/RamenTV-fltk "$@"
 WRAPPER
 chmod 755 "$STAGE/usr/local/bin/RamenTV-launcher"
-
-
-
 
 # Icono y .desktop (condicionales)
 # IMPORTANTE: APP=RamenTV → los .desktop DEBEN llamarse RamenTV.desktop y RamenTV-cli.desktop
@@ -67,7 +70,8 @@ chmod 755 "$STAGE/usr/local/bin/RamenTV-launcher"
     install -m 644 "$D/data/RamenTV.png" "$STAGE/usr/local/share/pixmaps/RamenTV.png"
 [ -f "$D/RamenTV.desktop" ] && \
     install -m 644 "$D/RamenTV.desktop" "$STAGE/usr/local/share/applications/RamenTV.desktop"
-
+[ -f "$D/RamenTV-cli.desktop" ] && \
+    install -m 644 "$D/RamenTV-cli.desktop" "$STAGE/usr/local/share/applications/RamenTV-cli.desktop"
 
 # Permisos
 find "$STAGE" -type d -exec chmod 755 {} +

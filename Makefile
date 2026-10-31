@@ -1,5 +1,4 @@
 # Makefile para RamenTV
-# Ubicación: Raíz del proyecto. Los fuentes están en src/
 
 SRC      = src
 CXX      = g++

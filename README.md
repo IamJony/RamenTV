@@ -1,32 +1,38 @@
-# Palomitas
+# RamenTV
 
-Busca y reproduce películas en español desde la terminal de Linux o mediante una interfaz gráfica en FLTK, compatible con FLINUX y Tiny Core Linux
+**RamenTV** es una interfaz gráfica (GUI) desarrollada en **FLTK** para **FLINUX** y **Tiny Core Linux**. Funciona como un *wrapper* (envoltorio) visual del proyecto **A-CLI**, un potente script en Bash diseñado para buscar y reproducir anime subtitulado al español directamente desde la terminal.
 
-![Palomitas](capturas/ui.png)
-![Palomitas-cli](capturas/cli.png)
+![Interfaz Gráfica de RamenTV](capturas/ui.png)
+![Interfaz CLI de A-CLI](capturas/cli.png)
 
 ## Características
 
-- **GUI en FLTK** con grilla de carátulas, temas, favoritos y búsqueda.
-- **CLI en bash** para usar desde terminal. Lanza con el comando `palomitas-cli-launcher`
-- Reproductor con `mplayer` o `mpv` + `yt-dlp`.
-- Favoritos persistentes en `~/.config/palomitas-fltk/data.json`.
+- **GUI en FLTK** con grilla de carátulas, temas personalizables, gestión de favoritos y buscador integrado.
+- **CLI en bash** (A-CLI) para usar directamente desde la terminal. Puedes lanzarlo con el comando `palomitas-cli-launcher` o ejecutando el script original de A-CLI.
+- **Reproducción fluida:** Utiliza `mplayer` o `mpv` en conjunto con `yt-dlp` para extraer y reproducir los streams de video.
 
 ## Dependencias
 
-### Para compilar
+### Para compilar (Entorno de desarrollo)
 - `compiletc` (g++, make)
 - `fltk-1.3-dev`
 - `libX11-dev`
 - `libXft-dev`
-- `squashfs-tools`
+- `squashfs-tools` (si deseas empaquetar la aplicación)
 
-### Para ejecutar
+### Para ejecutar (Entorno de usuario)
 - `fltk-1.3`
-- `mplayer` (o `mpv`)
-- `curl`
-- `jq`
+- `mplayer` (o `mpv` como alternativa)
+- `curl` (para peticiones HTTP)
+- `jq` (para procesar JSON)
 - `bash`
-- `yt-dlp`
+- `yt-dlp` (para extraer los enlaces de video)
 - `python3` (requerido por `yt-dlp`)
-- `ffmpeg` (opcional, mejora la extracción con `yt-dlp`)
+- `ffmpeg` (opcional, pero mejora la extracción y estabilidad con `yt-dlp`)
+
+## Instalación y Uso
+
+1. **Clona el repositorio:**
+   ```bash
+   git clone https://github.com/IamJony/RamenTV.git
+   cd RamenTV

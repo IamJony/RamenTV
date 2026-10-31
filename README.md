@@ -29,7 +29,7 @@
 - `curl` (para peticiones HTTP)
 - `jq` (para procesar JSON)
 - `bash`
-- `yt-dlp` (para extraer los enlaces de video)
+- `yt-dlp` (para poder reproducir con mplayer los enlaces de video)
 - `python3` (requerido por `yt-dlp`)
 - `ffmpeg` (opcional, pero mejora la extracción y estabilidad con `yt-dlp`)
 

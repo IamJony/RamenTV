@@ -85,7 +85,6 @@ if [ -f "$D/RamenTV.desktop" ]; then
 else
     cat > "$STAGE/usr/local/share/applications/RamenTV.desktop" <<'DESK'
 [Desktop Entry]
-Encoding=UTF-8
 Type=Application
 Name=RamenTV
 Comment=Mira anime subtitulado en español

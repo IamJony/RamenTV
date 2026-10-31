@@ -13,7 +13,7 @@ STAGE="$D/tcz-stage"
 [ -x "$D/RamenTV" ]                 || { echo "ERROR: compila primero (make)"; exit 1; }
 [ -f "$D/A-CLI/A-CLI.sh" ]          || { echo "ERROR: falta A-CLI/A-CLI.sh"; exit 1; }
 [ -f "$D/A-CLI/modules/search.sh" ] || { echo "ERROR: falta A-CLI/modules/search.sh"; exit 1; }
-[ -f "$D/RamenTV.desktop" ]         || { echo "ERROR: falta RamenTV.desktop"; exit 1; }
+[ -f "$D/ramentv.desktop" ]         || { echo "ERROR: falta ramentv.desktop"; exit 1; }
 
 # ── Instalar squashfs-tools si falta ─────────────────────────
 if ! command -v mksquashfs >/dev/null 2>&1; then
@@ -66,8 +66,10 @@ else
     echo "AVISO: no se encontró icono en data/ (RamenTV.png o RamenTV.jpeg)"
 fi
 
-# ── Lanzador .desktop (nombre = paquete, X-FullPathIcon dinámico) ──
-# Se genera en el stage para garantizar que X-FullPathIcon apunte al icono real.
+# ── Lanzador .desktop (nombre = paquete, en MAYÚSCULAS) ─────
+# Se genera directamente en el stage para garantizar:
+#   - Nombre de archivo: RamenTV.desktop (coincide con RamenTV.tcz)
+#   - X-FullPathIcon apuntando al icono realmente instalado
 {
     echo "[Desktop Entry]"
     echo "Name=RamenTV"

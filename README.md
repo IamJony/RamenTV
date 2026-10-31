@@ -1,6 +1,9 @@
 # RamenTV
 
-**RamenTV** es una interfaz gráfica (GUI) desarrollada en **FLTK** para **FLINUX** y **Tiny Core Linux**. Funciona como un *wrapper* (envoltorio) visual del proyecto [![A-CLI](https://img.shields.io/badge/Proyecto_Base-A--CLI-blue?style=for-the-badge&logo=github)](https://github.com/IamJony/A-CLI) un potente script en Bash diseñado para buscar y reproducir anime subtitulado al español directamente desde la terminal.
+ [![A-CLI](https://img.shields.io/badge/Proyecto_Base-A--CLI-blue?style=for-the-badge&logo=github)](https://github.com/IamJony/A-CLI) 
+
+
+**RamenTV** es una interfaz gráfica (GUI) desarrollada en **FLTK** para **FLINUX** y **Tiny Core Linux**. Funciona como un *wrapper* (envoltorio) visual del proyecto A-CLI potente script en Bash diseñado para buscar y reproducir anime subtitulado al español directamente desde la terminal.
 
 ![Interfaz Gráfica de RamenTV](capturas/ui.png)
 ![Interfaz CLI de A-CLI](capturas/cli.png)

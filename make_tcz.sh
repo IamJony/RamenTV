@@ -13,7 +13,7 @@ STAGE="$D/tcz-stage"
 [ -x "$D/RamenTV" ]                 || { echo "ERROR: compila primero (make)"; exit 1; }
 [ -f "$D/A-CLI/A-CLI.sh" ]          || { echo "ERROR: falta A-CLI/A-CLI.sh"; exit 1; }
 [ -f "$D/A-CLI/modules/search.sh" ] || { echo "ERROR: falta A-CLI/modules/search.sh"; exit 1; }
-[ -f "$D/ramentv.desktop" ]         || { echo "ERROR: falta ramentv.desktop"; exit 1; }
+[ -f "$D/RamenTV.desktop" ]         || { echo "ERROR: falta RamenTV.desktop"; exit 1; }
 
 # ── Instalar squashfs-tools si falta ─────────────────────────
 if ! command -v mksquashfs >/dev/null 2>&1; then
@@ -49,16 +49,39 @@ fi
     install -m 644 "$D/asset/home.jpeg" \
         "$STAGE/usr/local/share/RamenTV/asset/home.jpeg"
 
-# ── Icono ────────────────────────────────────────────────────
-if [ -f "$D/data/RamenTV.jpeg" ]; then
-    install -m 644 "$D/data/RamenTV.jpeg" "$STAGE/usr/local/share/pixmaps/RamenTV.jpeg"
-elif [ -f "$D/data/RamenTV.png" ]; then
-    install -m 644 "$D/data/RamenTV.png"  "$STAGE/usr/local/share/pixmaps/RamenTV.png"
+# ── Icono (PNG prioritario: TCL usa PNG 48x48 en la wbar) ───
+ICON_SRC=""
+ICON_DST=""
+if [ -f "$D/data/RamenTV.png" ]; then
+    ICON_SRC="$D/data/RamenTV.png"
+    ICON_DST="/usr/local/share/pixmaps/RamenTV.png"
+elif [ -f "$D/data/RamenTV.jpeg" ]; then
+    ICON_SRC="$D/data/RamenTV.jpeg"
+    ICON_DST="/usr/local/share/pixmaps/RamenTV.jpeg"
 fi
 
-# ── Lanzador .desktop ────────────────────────────────────────
-install -m 644 "$D/ramentv.desktop" \
-    "$STAGE/usr/local/share/applications/ramentv.desktop"
+if [ -n "$ICON_SRC" ]; then
+    install -m 644 "$ICON_SRC" "$STAGE$ICON_DST"
+else
+    echo "AVISO: no se encontró icono en data/ (RamenTV.png o RamenTV.jpeg)"
+fi
+
+# ── Lanzador .desktop (nombre = paquete, X-FullPathIcon dinámico) ──
+# Se genera en el stage para garantizar que X-FullPathIcon apunte al icono real.
+{
+    echo "[Desktop Entry]"
+    echo "Name=RamenTV"
+    echo "Comment=Mira anime subtitulado en español"
+    echo "Exec=RamenTV"
+    echo "Icon=RamenTV"
+    if [ -n "$ICON_DST" ]; then
+        echo "X-FullPathIcon=$ICON_DST"
+    fi
+    echo "Terminal=false"
+    echo "Type=Application"
+    echo "Categories=Video;"
+} > "$STAGE/usr/local/share/applications/RamenTV.desktop"
+chmod 644 "$STAGE/usr/local/share/applications/RamenTV.desktop"
 
 # ── Wrapper CLI: /usr/local/bin/RamenTV-cli ─────────────────
 cat > "$STAGE/usr/local/bin/RamenTV-cli" <<'WRAPPER'
@@ -83,7 +106,6 @@ mksquashfs "$STAGE" "$OUT/$APP.tcz" \
 rm -rf "$STAGE"
 
 # ── Dependencias ─────────────────────────────────────────────
-# Ajusta según lo que realmente uses en TCL.
 # cJSON se compila dentro del binario, así que no es dependencia.
 cat > "$OUT/$APP.tcz.dep" <<'DEP'
 fltk-1.3.tcz

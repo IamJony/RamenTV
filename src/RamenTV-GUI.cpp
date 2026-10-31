@@ -1121,10 +1121,9 @@ void RamenTVGUI::play_with_mplayer(const std::string& m3u8_url, const std::strin
         std::string safe_title = title + " - Capitulo " + chap_num;
         for (auto& c : safe_title) if (c == '"' || c == '\\') c = ' ';
 
-        // Comando idéntico al de A-CLI.sh
         std::string cmd = "( cd /tmp && yt-dlp --add-header \"Referer: https://jkanime.net\" "
                           "-S \"res:480\" -o - " + shell_quote(m3u8_url) + " "
-                          "2>/tmp/TEMP_A-CLI/ytdlp.log | "
+                          "2>/tmp/TEMP_A-CLI/ytdlp.log ) | "
                           "mplayer -zoom -vf scale=640:480 -cache 6144 -demuxer lavf "
                           "-title \"" + esc(safe_title) + "\" - "
                           ">/tmp/TEMP_A-CLI/mplayer.log 2>&1";

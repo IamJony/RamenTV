@@ -284,13 +284,14 @@ play_with_mplayer() {
     if command -v mplayer &> /dev/null; then
         echo ""
         printf '%b\n' "${YELLOW}> Reproduciendo con mplayer (via yt-dlp)...${NC}"
-
         yt-dlp --add-header "Referer: $BASE_URL" \
-        -S "res:480" -o - "$m3u8_url" \
-        2>${TEMP_DIR}/ytdlp.log \
-        | mplayer -zoom -vf scale=640:480 -cache 6144 -demuxer lavf \
-        -title "${titulo} - Capitulo ${capitulo}" - \
-        >${TEMP_DIR}/mplayer.log 2>&1
+            --paths temp:"$TEMP_DIR" \
+            -S "res:480" -o - "$m3u8_url" \
+            2>${TEMP_DIR}/ytdlp.log \
+            | mplayer -zoom -vf scale=640:480 -cache 6144 -demuxer lavf \
+            -noconsolecontrols \
+            -title "${titulo} - Capitulo ${capitulo}" - \
+            >${TEMP_DIR}/mplayer.log 2>&1
     else
         printf '%b\n' "${RED}MPlayer no esta instalado${NC}"
         echo ""

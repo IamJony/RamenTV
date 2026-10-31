@@ -1,7 +1,7 @@
 [Desktop Entry]
-Name=RamenTV-fltk
+Name=RamenTV
 Comment=Mira anime subtitulado en español
-Exec=RamenTV
+Exec=RamenTV-fltk
 Icon=RamenTV
 X-FullPathIcon=/usr/local/share/pixmaps/RamenTV.png
 Terminal=false

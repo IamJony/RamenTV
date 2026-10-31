@@ -57,7 +57,7 @@ else
 fi
 
 # --- Wrappers en /usr/local/bin ---
-# CLI: cd a A-CLI/ y ejecuta el script
+# CLI: cd a A-CLI/ y ejecuta el script (útil si lo llamas desde terminal manualmente)
 cat > "$STAGE/usr/local/bin/RamenTV-cli-launcher" <<'WRAPPER'
 #!/bin/sh
 PKG=/usr/local/share/RamenTV
@@ -79,34 +79,21 @@ chmod 755 "$STAGE/usr/local/bin/RamenTV-launcher"
 [ -f "$D/data/RamenTV.png" ] && \
     install -m 644 "$D/data/RamenTV.png" "$STAGE/usr/local/share/pixmaps/RamenTV.png"
 
-# --- .desktop ---
+# --- .desktop (SOLO GUI) ---
 if [ -f "$D/RamenTV.desktop" ]; then
     install -m 644 "$D/RamenTV.desktop" "$STAGE/usr/local/share/applications/RamenTV.desktop"
 else
     cat > "$STAGE/usr/local/share/applications/RamenTV.desktop" <<'DESK'
 [Desktop Entry]
+Encoding=UTF-8
 Type=Application
 Name=RamenTV
-Comment=Ver anime subtitulado en espanol (GUI)
+Comment=Mira anime subtitulado en español
 Exec=/usr/local/bin/RamenTV-launcher
-Icon=/usr/local/share/pixmaps/RamenTV.png
+Icon=RamenTV
+X-FullPathIcon=/usr/local/share/pixmaps/RamenTV.png
 Terminal=false
-Categories=AudioVideo;Video;
-DESK
-fi
-
-if [ -f "$D/RamenTV-cli.desktop" ]; then
-    install -m 644 "$D/RamenTV-cli.desktop" "$STAGE/usr/local/share/applications/RamenTV-cli.desktop"
-else
-    cat > "$STAGE/usr/local/share/applications/RamenTV-cli.desktop" <<'DESK'
-[Desktop Entry]
-Type=Application
-Name=RamenTV (CLI)
-Comment=Ver anime subtitulado en espanol (terminal)
-Exec=/usr/local/bin/RamenTV-cli-launcher
-Icon=/usr/local/share/pixmaps/RamenTV.png
-Terminal=true
-Categories=AudioVideo;Video;
+Categories=Video;AudioVideo;
 DESK
 fi
 

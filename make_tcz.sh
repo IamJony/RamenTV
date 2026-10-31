@@ -50,13 +50,23 @@ cd /usr/local/bin/RamenTV-cli/ && exec bash ./A-CLI.sh "$@"
 WRAPPER
 chmod 755 "$STAGE/usr/local/bin/RamenTV-cli-launcher"
 
+# Wrapper GUI en /usr/local/bin/RamenTV-launcher (fija CWD y RAMENTV_HOME)
+cat > "$STAGE/usr/local/bin/RamenTV-launcher" <<'WRAPPER'
+#!/bin/sh
+export RAMENTV_HOME=/usr/local/share/RamenTV
+cd "$RAMENTV_HOME" || exit 1
+exec /usr/local/bin/RamenTV-fltk "$@"
+WRAPPER
+chmod 755 "$STAGE/usr/local/bin/RamenTV-launcher"
+
 # Icono y .desktop (condicionales)
 # IMPORTANTE: APP=RamenTV → los .desktop DEBEN llamarse RamenTV.desktop y RamenTV-cli.desktop
 [ -f "$D/data/RamenTV.png" ] && \
     install -m 644 "$D/data/RamenTV.png" "$STAGE/usr/local/share/pixmaps/RamenTV.png"
 [ -f "$D/RamenTV.desktop" ] && \
     install -m 644 "$D/RamenTV.desktop" "$STAGE/usr/local/share/applications/RamenTV.desktop"
-
+[ -f "$D/RamenTV-cli.desktop" ] && \
+    install -m 644 "$D/RamenTV-cli.desktop" "$STAGE/usr/local/share/applications/RamenTV-cli.desktop"
 
 # Permisos
 find "$STAGE" -type d -exec chmod 755 {} +

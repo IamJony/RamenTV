@@ -59,7 +59,7 @@ chmod 755 "$STAGE/usr/local/bin/RamenTV-cli-launcher"
 cat > "$STAGE/usr/local/bin/RamenTV-launcher" <<'WRAPPER'
 #!/bin/sh
 export RAMENTV_HOME=/usr/local/share/RamenTV
-cd "$RAMENTV_HOME" || exit 1
+cd "$RAMENTV_HOME/A-CLI" || exit 1
 exec /usr/local/bin/RamenTV-fltk "$@"
 WRAPPER
 chmod 755 "$STAGE/usr/local/bin/RamenTV-launcher"

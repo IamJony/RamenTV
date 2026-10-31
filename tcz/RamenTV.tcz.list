@@ -1,0 +1,14 @@
+/usr/local/bin/RamenTV-cli-launcher
+/usr/local/bin/RamenTV-launcher
+/usr/local/share/RamenTV/A-CLI/A-CLI.sh
+/usr/local/share/RamenTV/A-CLI/modules/chapters.sh
+/usr/local/share/RamenTV/A-CLI/modules/config.sh
+/usr/local/share/RamenTV/A-CLI/modules/m3u8.sh
+/usr/local/share/RamenTV/A-CLI/modules/search.sh
+/usr/local/share/RamenTV/A-CLI/modules/servers.sh
+/usr/local/share/RamenTV/A-CLI/modules/servers_ext.sh
+/usr/local/share/RamenTV/A-CLI/modules/util.sh
+/usr/local/share/RamenTV/RamenTV
+/usr/local/share/RamenTV/asset/home.jpeg
+/usr/local/share/applications/RamenTV.desktop
+/usr/local/share/pixmaps/RamenTV.png

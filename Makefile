@@ -1,4 +1,4 @@
-# Makefile para RamenTV
+# Makefile para ramentv
 
 SRC      = src
 CXX      = g++
@@ -10,8 +10,8 @@ CFLAGS   = -O2 -Wall
 
 LDFLAGS  = $(shell fltk-config --ldflags 2>/dev/null) -lfltk_images -lm -lpthread -lstdc++
 
-OBJS   = $(SRC)/RamenTV-GUI.o $(SRC)/themes.o $(SRC)/library.o $(SRC)/cJSON.o
-TARGET = RamenTV
+OBJS   = $(SRC)/ramentv-GUI.o $(SRC)/themes.o $(SRC)/library.o $(SRC)/cJSON.o
+TARGET = ramentv
 
 all: $(TARGET)
 
@@ -20,7 +20,7 @@ $(TARGET): $(OBJS)
 	$(CXX) -o $@ $(OBJS) $(LDFLAGS)
 
 
-$(SRC)/RamenTV-GUI.o: $(SRC)/RamenTV-GUI.cpp $(SRC)/themes.h $(SRC)/library.h
+$(SRC)/ramentv-GUI.o: $(SRC)/ramentv-GUI.cpp $(SRC)/themes.h $(SRC)/library.h
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 

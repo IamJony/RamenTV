@@ -1,0 +1,12 @@
+Title:          ramentv.tcz
+Description:    ramentv: ver anime subtitulado en espanol
+Version:        1.0.0
+Author:         IamJony
+Original-site:  https://github.com/IamJony/ramentv
+Copying-policy: MIT
+Size:           708K
+Extension_by:   IamJony
+Tags:           anime video fltk streaming cli
+Comments:       Incluye GUI (ramentv) y CLI (ramentv-cli-launcher).
+Change-log:     2026/11/01 1.0.0 primera version
+Current:        2026/11/01 1.0.0

@@ -1,0 +1,14 @@
+/usr/local/bin/ramentv-cli-launcher
+/usr/local/bin/ramentv-launcher
+/usr/local/share/applications/ramentv.desktop
+/usr/local/share/pixmaps/ramentv.png
+/usr/local/share/ramentv/A-CLI/A-CLI.sh
+/usr/local/share/ramentv/A-CLI/modules/chapters.sh
+/usr/local/share/ramentv/A-CLI/modules/config.sh
+/usr/local/share/ramentv/A-CLI/modules/m3u8.sh
+/usr/local/share/ramentv/A-CLI/modules/search.sh
+/usr/local/share/ramentv/A-CLI/modules/servers.sh
+/usr/local/share/ramentv/A-CLI/modules/servers_ext.sh
+/usr/local/share/ramentv/A-CLI/modules/util.sh
+/usr/local/share/ramentv/asset/home.jpeg
+/usr/local/share/ramentv/ramentv

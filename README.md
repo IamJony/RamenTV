@@ -11,7 +11,7 @@
 ## Características
 
 - **GUI en FLTK** con grilla de carátulas, temas personalizables, gestión de favoritos y buscador integrado.
-- **CLI en bash** (A-CLI) para usar directamente desde la terminal. Puedes lanzarlo con el comando `palomitas-cli-launcher` o ejecutando el script original de A-CLI.
+- **CLI en bash** (A-CLI) para usar directamente desde la terminal. Puedes lanzarlo con el comando `ramentv-cli-launcher`.
 - **Reproducción fluida:** Utiliza `mplayer` o `mpv` en conjunto con `yt-dlp` para extraer y reproducir los streams de video.
 
 ## Dependencias

@@ -5,3 +5,5 @@ curl.tcz
 wget.tcz
 yt-dlp.tcz
 mplayer-cli.tcz
+libXft.tcz
+cairo.tcz

@@ -110,7 +110,7 @@ mksquashfs "$STAGE" "$OUT/$APP.tcz" $MKSQ_OPTS >/dev/null
 rm -rf "$STAGE"
 
 # Dependencias
-printf '%s\n' fltk-1.3.tcz jq.tcz bash.tcz curl.tcz wget.tcz yt-dlp.tcz mplayer-cli.tcz > "$OUT/$APP.tcz.dep"
+printf '%s\n' fltk-1.3.tcz libXft.tcz cairo.tcz jq.tcz bash.tcz curl.tcz wget.tcz yt-dlp.tcz mplayer-cli.tcz > "$OUT/$APP.tcz.dep"
 
 # Checksum
 (cd "$OUT" && md5sum "$APP.tcz" > "$APP.tcz.md5.txt")
